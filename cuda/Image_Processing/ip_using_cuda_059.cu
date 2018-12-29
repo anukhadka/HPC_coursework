@@ -436,9 +436,9 @@ unsigned char image[] = {255,255,255,255,255,255,255,255,255,255,255,255,255,255
           + (input[h] * -1);
 
       if (r >= 0) { 
-        output[i] = 255;
-      } else {
         output[i] = 0;
+      } else {
+        output[i] = 255;
       }
     }
 }
@@ -506,20 +506,19 @@ int main(int argc, char **argv) {
   clock_gettime(CLOCK_MONOTONIC, &start);
 
 
-  //printf("image dimensions %dx%d\n", width, height);
+  
   detect_edges<<<100,72>>>(d_image, d_results);
   cudaThreadSynchronize();
 
  cudaMemcpy(&results, d_results, sizeof(unsigned char) * (width * height), cudaMemcpyDeviceToHost);
-
+  cudaFree(&d_image);
+  cudaFree(&d_results);
 
   clock_gettime(CLOCK_MONOTONIC, &finish);
   time_difference(&start, &finish, &time_elapsed);
   printf("Time elapsed was %lldns or %0.9lfs\n", time_elapsed,
          (time_elapsed/1.0e9)); 
 
-   cudaFree(&d_image);
-  cudaFree(&d_results);
 
   glutInit(&argc, argv);
   glutInitWindowSize(width * 2,height);
