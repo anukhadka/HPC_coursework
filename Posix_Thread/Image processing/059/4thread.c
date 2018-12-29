@@ -27,7 +27,7 @@
       the pixel data type.
     
   To compile adapt the code below wo match your filenames:  
-    cc -o ip_coursework ip_coursework.c -lglut -lGL -lm -pthreadS 
+    cc -o ip_coursework ip_coursework.c -lglut -lGL -lm -pthread
    
   Dr Kevan Buckley, University of Wolverhampton, 2018
 ******************************************************************************/
@@ -156,20 +156,19 @@ clock_gettime(CLOCK_MONOTONIC, &start);
   pthread_join(t2, NULL);
   pthread_join(t3, NULL);
   pthread_join(t4, NULL);
- clock_gettime(CLOCK_MONOTONIC, &finish);
-  time_difference(&start, &finish, &time_elapsed);
-  printf("Time elapsed was %lldns or %0.9lfs\n", time_elapsed, 
-         (time_elapsed/1.0e9)); 
-
-
-
-
+ 
   glutInit(&argc, argv);
   glutInitWindowSize(width * 2,height);
   glutInitDisplayMode(GLUT_SINGLE | GLUT_LUMINANCE);
       
   glutCreateWindow("6CS005 Image Progessing Courework");
   glutDisplayFunc(display);
+  
+  clock_gettime(CLOCK_MONOTONIC, &finish);
+  time_difference(&start, &finish, &time_elapsed);
+  printf("Time elapsed was %lldns or %0.9lfs\n", time_elapsed, 
+         (time_elapsed/1.0e9)); 
+
   glutKeyboardFunc(key_pressed);
   glClearColor(0.0, 1.0, 0.0, 1.0); 
 
