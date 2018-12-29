@@ -22,7 +22,7 @@
       the pixel data type.
     
   To compile adapt the code below wo match your filenames:  
-    cc -o ip_coursework ip_coursework.c -lglut -lGL -lm 
+    cc -o ip_coursework ip_coursework_059.c -lglut -lGL -lm 
    
   Dr Kevan Buckley, University of Wolverhampton, 2018
 ******************************************************************************/
@@ -111,16 +111,12 @@ int main(int argc, char **argv) {
  struct timespec start, finish;   
   long long int time_elapsed;
   clock_gettime(CLOCK_MONOTONIC, &start);
+ printf("image dimensions %dx%d\n", width, height);
+  detect_edges(image, results);
 clock_gettime(CLOCK_MONOTONIC, &finish);
 time_difference(&start, &finish, &time_elapsed);
   printf("Time elapsed was %lldns or %0.9lfs\n", time_elapsed, 
          (time_elapsed/1.0e9)); 
- 
-
-
-  printf("image dimensions %dx%d\n", width, height);
-  detect_edges(image, results);
-
   glutInit(&argc, argv);
   glutInitWindowSize(width * 2,height);
   glutInitDisplayMode(GLUT_SINGLE | GLUT_LUMINANCE);
