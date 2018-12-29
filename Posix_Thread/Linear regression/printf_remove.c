@@ -74,6 +74,9 @@ int main() {
   
   double om[] = {0,1,1, 1, 0,-1,-1,-1};
   double oc[] = {1,1,0,-1,-1,-1, 0, 1};
+  struct timespec start, finish;   
+  long long int time_elapsed;
+  clock_gettime(CLOCK_MONOTONIC, &start);
 
   be = rms_error(bm, bc);
 
@@ -101,9 +104,7 @@ int main() {
     }
   }
   printf("minimum m,c is %lf,%lf with error %lf\n", bm, bc, be);
- struct timespec start, finish;   
-  long long int time_elapsed;
-  clock_gettime(CLOCK_MONOTONIC, &start);
+ 
  clock_gettime(CLOCK_MONOTONIC, &finish);
  time_difference(&start, &finish, &time_elapsed);
   printf("Time elapsed was %lldns or %0.9lfs\n", time_elapsed, 
@@ -366,4 +367,4 @@ point_t data[] = {
   {71.03,113.96},{74.32,123.87},{56.11,96.81},{27.80,47.57},
   {17.54,58.02},{52.96,90.32},{27.16,71.66},{35.44,58.75},
   {46.07,96.38},{86.52,142.06},{41.28,96.03},{50.29,79.84}
-};
+};s
